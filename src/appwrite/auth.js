@@ -10,7 +10,7 @@ export class AuthService {
             .setProject(config.appwriteProjectId);
         this.account = new Account(this.client);
     }
-    async logoutUser(){
+    async logout(){
         try {
             await this.account.deleteSessions();
         } catch (error) {
