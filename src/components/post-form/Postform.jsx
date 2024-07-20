@@ -16,7 +16,7 @@ export const Postform = ({ post }) => {
 				status: post?.status || "active",
 			},
 		});
-	const userData = useSelector((state) => state.user.userData);
+	const userData = useSelector((state) => state.auth.userData);
 	const submit = async (data) => {
 		if (post) {
 			const file = data.image[0] ? service.uploadFile(data.image[0]) : null;
