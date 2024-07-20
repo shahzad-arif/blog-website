@@ -11,9 +11,9 @@ export const RTE = ({name , control  , defaultvalue='' , label}) => {
         control={control}
         render={({field : {onChange}})=>(
             <Editor
-            initialValue={defaultValue}
+            initialValue={defaultvalue}
             init={{
-                initialValue: defaultValue,
+                initialValue: defaultvalue,
                 height: 500,
                 menubar: true,
                 plugins: [
