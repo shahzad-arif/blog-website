@@ -11,6 +11,7 @@ import SignUp from "./Signup";
 import Login from "./Login";
 import { Postform } from "./post-form/Postform";
 import PostCard from "./PostCard";
+
 export {
     Header, 
     Footer,
@@ -25,4 +26,5 @@ export {
     Login,
     Postform,
     PostCard
+    
 }

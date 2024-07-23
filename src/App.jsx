@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import {login , logout} from './store/authSlice'
 import  Header  from './components/Header/Header.jsx'
 import Footer  from './components/Footer/Footer.jsx'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -25,12 +26,13 @@ function App() {
       setLoading(false);
     })
   },[])
+
   return !loading ? (
     <div className='min-h-screen flex flex-wrap content-between bg-slate-600'>
       <div className='w-full block'>
         <Header/>
         <main>
-        Test{/* <Outlet/>*/} 
+        <Outlet/>
         </main>
         <Footer/>
       </div>

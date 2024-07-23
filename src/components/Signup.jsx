@@ -77,11 +77,10 @@ const Signup = () => {
 							label="Password :"
 							type="password"
 							placeholder="Enter your password"
-							{...register(
+							{...
 								register("password", {
 									required: true,
-								})
-							)}
+								})}
 						/>
 						<Button
 							children="Create account"

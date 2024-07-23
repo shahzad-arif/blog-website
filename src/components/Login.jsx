@@ -68,11 +68,10 @@ const Login = () => {
 							label="Password :"
 							type="password"
 							placeholder="Enter your password"
-							{...register(
-								register("password", {
+							{...register("password", {
 									required: true,
 								})
-							)}
+							}
 						/>
                         <Button children="Sign in"
                         type="submit"

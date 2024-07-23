@@ -24,7 +24,7 @@ async getAllPost(queries = [Query.equal("status", "active")]){
 }
 async getSinglePost({slug}){
     try {
-        return await this.databases.getDocument(config.appwriteDatabaseId, config.appwriteCollectionId , slug)
+        return await this.databases.getDocument(config.appwriteDatabaseId, config.appwriteCollectionId ,slug)
     } catch (error) {
         console.log("Appwrite Error :: getSinglePost error ", error);
         return false;
@@ -68,7 +68,8 @@ async createPost({title , slug ,content , featuredImage , status , userId}){
 //file Upload services
     async uploadFile(file){
         try {
-            await this.bucket.createFile(config.appwriteBucketId , ID.unique(), file )
+            return await this.bucket.createFile(config.appwriteBucketId , ID.unique(), file )
+    
         } catch (error) {
             console.log("Appwrite Error :: uploadFile error ", error);
             return false;
