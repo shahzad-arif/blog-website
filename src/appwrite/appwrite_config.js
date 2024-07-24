@@ -22,7 +22,7 @@ async getAllPost(queries = [Query.equal("status", "active")]){
         
     }
 }
-async getSinglePost({slug}){
+async getSinglePost(slug){
     try {
         return await this.databases.getDocument(config.appwriteDatabaseId, config.appwriteCollectionId ,slug)
     } catch (error) {
@@ -42,7 +42,7 @@ async updatePost(slug,{title  ,content , featuredImage , status}){
         console.log("Appwrite Error :: updatePost error ", error);
     }
 }
-async deletePost({slug}){
+async deletePost(slug){
     try {
          await this.databases.deleteDocument(config.appwriteDatabaseId , config.appwriteCollectionId , slug)
          return true;

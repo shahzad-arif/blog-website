@@ -71,10 +71,9 @@ const router = createBrowserRouter([
         
       },
       {
-        path:'/post/:slug',
-        element:<Post/>
-        
-      }
+        path: "/post/:slug",
+        element: <Post />,
+    },
     ]
   }
 ])

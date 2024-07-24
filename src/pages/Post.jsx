@@ -1,42 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import { Link , useNavigate, useParams } from 'react-router-dom'
-import service from '../appwrite/appwrite_config'
-import { Button, Container } from '../components'
-import parse from 'html-react-parser'
-import { useSelector } from 'react-redux'
-const Post = () => {
-    const [post , setPost] = useState(null)
-    const {slug} = useParams();
-    const navigate = useNavigate();
-    const userData = useSelector((state)=>state.auth.userData);
-    const isAuthor = post && userData ? post.userId === userdata.$id : false;
-    useEffect(()=>{
-        if (slug) {
-            service.getSinglePost(slug).then((then)=>{
-                if (post) {
-                    setPost(post)
-                }
-                else{
-                    navigate('/')
-                }
-            })   
-        }
-        else{navigate('/')}
-       
-    }, [slug , navigate])
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import service from '../appwrite/appwrite_config';
+import { Button, Container } from '../components';
+import parse from 'html-react-parser';
+import { useSelector } from 'react-redux';
 
-    const deletePost = () =>{
-        service.deletePost(slug).then((status)=>{
-            service.deleteFile(post.featuredImage);
-            navigate('/')
-        })
-    }
+export default function Post() {
+    const [post, setPost] = useState(null);
+    const { slug } = useParams();
+    const navigate = useNavigate();
+    const userData = useSelector((state) => state.auth.userData);
+
+    useEffect(() => {
+        if (slug) {
+            service.getSinglePost(slug).then((post) => {
+                if (post) {
+                    setPost(post);
+                } else {
+                    console.log("Post not found for slug:", slug);
+                    navigate("/");
+                }
+            });
+        } else {
+            navigate("/");
+        }
+    }, [slug, navigate]);
+
+    const deletePost = () => {
+        service.deletePost(post.$id).then((status) => {
+            if (status) {
+                service.deleteFile(post.featuredImage);
+                navigate("/");
+            }
+        });
+    };
+
+    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    console.log("Post fetched:", post);
+    console.log("isAuthor:", isAuthor);
+    console.log("Logged in user ID:", userData?.$id);
+    console.log("Post user ID:", post?.userId);
+
     return post ? (
         <div className="py-8">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
+                        src={service.filePreview(post.featuredImage)}
                         alt={post.title}
                         className="rounded-xl"
                     />
@@ -59,9 +69,8 @@ const Post = () => {
                 </div>
                 <div className="browser-css">
                     {parse(post.content)}
-                    </div>
+                </div>
             </Container>
         </div>
     ) : null;
 }
-export default Post
